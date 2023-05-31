@@ -119,9 +119,9 @@ public class BettingHouse {
         	System.out.println("------------------------------------");
         	return;
         }
-        effectiveLogIn(user);
         int opcion = 0;
         while(opcion != 2){
+        	effectiveLogIn(user);
             opcion = logInMenu(user);
         };
         
@@ -138,7 +138,6 @@ public class BettingHouse {
 	}
     
     public static void effectiveLogOut(User user){
-    	System.out.println(user.getNickname() + " have successfully logged out.");
     }
     
     public static void viewRegisteredIndividuals(){
