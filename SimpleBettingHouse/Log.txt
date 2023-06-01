@@ -1,0 +1,2 @@
+Sesión inicada por usuario: [57]	Fecha: [mié may. 31 22:15:57 ECT 2023]
+Sesión cerrada por usuario: [57]	Fecha: [mié may. 31 22:15:58 ECT 2023]
