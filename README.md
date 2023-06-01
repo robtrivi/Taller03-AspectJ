@@ -10,4 +10,4 @@
 ## Funcionamiento de Aspectos
 ![RobespierreEvidencia](funText.png)
 ## Version Inicial de Aspectos
-![DiazEvidencia](aspectoDiaz.png)
+![DiazEvidencia](aspectosDiaz.png)
