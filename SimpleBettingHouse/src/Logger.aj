@@ -1,71 +1,45 @@
 import java.io.File;
-import java.util.Calendar;
-
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-public aspect Logger {
-	File file = new File("log.txt");
-    Calendar cal = Calendar.getInstance();
-    //Aspecto: Deben hacer los puntos de cortes (pointcut) para crear un log con los tipos de transacciones realizadas.
-    pointcut success() : call(* effectiveLogOut*(..) );
-    after() : success() {
-    	String username = "user";
-    	sessionClosed(username);
-    	
-    }
-    
-    
-    pointcut successReg() : call(* successfulSignUp*(..) );
-    after() : successReg() {
-    //Aspecto ejemplo: solo muestra este mensaje despu�s de haber creado un usuario 
-    	String nickname ="sdfdsf";
-    	String password = "sdadsa";
-    	registerAction(nickname, password);
-    }
-    
-    public static void sessionClosed(String username) {
-    	
-    	//todo
-    }
-public static void registerAction(String username, String password) {
-    	
-		try {
-			FileWriter fileWritter = new FileWriter("Register.txt");
-			
-			fileWritter.write("");
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-}
-		/*
-		
-    	//imprimir info del usuario
-		// escribir en archivo register.txt
+import com.bettinghouse.Person;
 import com.bettinghouse.User;
 
-
-
 public aspect Logger {
-	
-	
-	
-	//File file = new File("log.txt");
-    Calendar cal = Calendar.getInstance();
-    pointcut success(User user) : call(* effectiveLog*(User)) && args(user);
+
+    pointcut successLog(User usr): call(* effectiveLog*(User)) && args(usr);
+
+    after(User usr): successLog(usr) {
+        System.out.println("Log");
+        String suceso = "cerrada";
+        if (thisJoinPoint.getSignature().getName().equals("effectiveLogIn")) {
+            suceso = "inicada";
+        }
+        String msg = String.format("Sesión %s por usuario: [%s]", suceso, usr.getNickname());
+        escribirLog("Log.txt",msg);
+    }
     
-    after(User user) : success(user) {
-    	
-    	String hecho = "";
-    	
-    	if (thisJoinPointStaticPart.getSignature().getName().equals("effectiveLogOut")) {
-    		hecho = "inicada";
-    	}
-    	
-    	String mensaje = String.format("Sesión %s por usuario: [%s]\t Fecha: [%s]",hecho,user.getNickname(),cal.toString());
-    	System.out.print(mensaje);
+    pointcut successRegister(User usr, Person person): execution(* successfulSignUp(User, Person)) && args(usr,person);
+
+    after(User usr, Person person): successRegister(usr, person) {
+        String msg = String.format("Usuario registrado: [nickname = %s, password = %s]", usr.getNickname(), usr.getPassword());
+        escribirLog("Register.txt",msg);
+
+    }
+    
+    private static void escribirLog(String fileName, String text) {
+        File file = new File(fileName);
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        String time = sdf.format(Calendar.getInstance().getTime());
+
+        try (PrintWriter out = new PrintWriter(new FileWriter(file, true))) {
+            text = text + String.format("\tFecha: [%s]",sdf.format(Calendar.getInstance().getTime()));
+            out.println(text);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
-
-*/
