@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+/Users/infrative/jobs/Taller03-AspectJ/SimpleBettingHouse/.metadata/.plugins/org.eclipse.jdt.core
+4123385528.index
+2660736807.index
+1865797976.index

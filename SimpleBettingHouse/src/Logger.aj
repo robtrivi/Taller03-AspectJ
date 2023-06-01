@@ -1,7 +1,6 @@
 import java.io.File;
 import java.util.Calendar;
 
-<<<<<<< Updated upstream
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -38,11 +37,15 @@ public static void registerAction(String username, String password) {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+}
+		/*
 		
     	//imprimir info del usuario
 		// escribir en archivo register.txt
-=======
 import com.bettinghouse.User;
+
+
 
 public aspect Logger {
 	
@@ -62,7 +65,7 @@ public aspect Logger {
     	
     	String mensaje = String.format("Sesión %s por usuario: [%s]\t Fecha: [%s]",hecho,user.getNickname(),cal.toString());
     	System.out.print(mensaje);
->>>>>>> Stashed changes
     }
 }
 
+*/
